@@ -12,6 +12,7 @@ public class ParticipantDirectory {
     private final Map<String, Participant> usernameToParticipant;
 
     // TODO 1a: Declare a TreeMap to store participants with ID as key.
+    private final Map<Integer, Participant> idToParticipant;
 
 
     /**
@@ -22,7 +23,9 @@ public class ParticipantDirectory {
         // Create the TreeMap to store participants with username as key.
         this.usernameToParticipant = new TreeMap<>();
 
+
         // TODO 1b: Create the TreeMap to store participants with ID as key.
+        this.idToParticipant = new TreeMap<>();
 
     }
 
@@ -41,6 +44,7 @@ public class ParticipantDirectory {
 
         // TODO 2: Store the Participant, p, in the second TreeMap
         // TODO 2: using the idNumber attribute of p as key.
+        this.idToParticipant.put(p.idNumber, p);
 
     }
 
@@ -66,7 +70,7 @@ public class ParticipantDirectory {
     public Participant getParticipantByID(Integer idNumber) {
         // TODO 3: Return the Participant associated with the given idNumber
         // TODO 3: using the second TreeMap created in step 1.
-        return null;
+        return this.idToParticipant.get(idNumber);
     }
 
     /**
@@ -94,7 +98,12 @@ public class ParticipantDirectory {
     public String getRosterByID() {
         // TODO 4: Use the second TreeMap created in step 1 to build and return
         // TODO 4: return a String containing a participant roster sorted by ID.
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (Participant p : this.idToParticipant.values()) {
+            sb.append(p);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -116,6 +125,13 @@ public class ParticipantDirectory {
 
         System.out.println("Participant Roster By Username:");
         System.out.println(dir.getRosterByUsername());
+
+        System.out.println("Participant 'ID 2': " +
+                dir.getParticipantByID(2));
+
+        System.out.println("Participant Roster By ID:");
+        System.out.println(dir.getRosterByID());
+
 
         // TODO 5 (optional): Add a bit of test code for the new TreeMap.
 
